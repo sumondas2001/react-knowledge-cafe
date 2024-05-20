@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
+import { IoBookmarksOutline } from "react-icons/io5";
 
-const Blog = ({ blog }) => {
-     const { cover_img, title, author_img, reading_time, author, posted_date, hashtags } = blog
-     console.log(blog)
+const Blog = ({ blog, handelAddToBookeMarkes }) => {
+     const { cover_img, title, author_img, reading_time, author, posted_date, hashtags } = blog;
+     // console.log(blog)
      return (
           // main section 
-          <main>
-               <img className='w-3/5 rounded-xl' src={cover_img} alt="" />
+          <main className=''>
+               <img className='w-full rounded-xl' src={cover_img} alt="" />
                <div className='flex justify-between '>
                     <div className='flex  mt-6 mb-4 '>
                          <img src={author_img} alt="" />
@@ -15,22 +16,28 @@ const Blog = ({ blog }) => {
                               <p className='font-semibold'>{posted_date}</p>
                          </div>
                     </div>
-                    <div>
-                         <span className='text-sm font-medium'>{reading_time}  min read</span>
+                    <div className=' mt-3 '>
+                         <span className='text-sm font-medium mr-4 '>{reading_time}  min read</span>
+                         <button onClick={() => handelAddToBookeMarkes(blog)} className='text-xl '>
+                              <IoBookmarksOutline />
+                         </button>
                     </div>
                </div>
                <div className='mb-20'>
                     <h1 className='font-semibold text-4xl mb-2'>{title}</h1>
-                    <p className='font-medium text-sm px-4 '>
+                    <p className='font-medium text-sm'>
                          {
                               hashtags.map((hash, inx) => <span key={inx} > <a className='px-1' href="">{hash}</a> </span>)
                          }
                     </p>
+                    <button className='underline underline-offset-1 text-teal-600 mt-5 text-sm font-semibold'>Mark as read</button>
                </div>
           </main>
      );
 };
 Blog.propTypes = {
-     blog: PropTypes.object.isRequired
+     blog: PropTypes.object.isRequired,
+     handelAddToBookeMarkes: PropTypes.func
+
 }
 export default Blog;
