@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { IoBookmarksOutline } from "react-icons/io5";
 
-const Blog = ({ blog, handelAddToBookeMarkes }) => {
-     const { cover_img, title, author_img, reading_time, author, posted_date, hashtags } = blog;
+const Blog = ({ blog, handelAddToBookeMarkes, handelMakeAsRead }) => {
+     const { id, cover_img, title, author_img, reading_time, author, posted_date, hashtags } = blog;
      // console.log(blog)
      return (
           // main section 
@@ -17,7 +17,7 @@ const Blog = ({ blog, handelAddToBookeMarkes }) => {
                          </div>
                     </div>
                     <div className=' mt-3 '>
-                         <span className='text-sm font-medium mr-4 '>{reading_time}  min read</span>
+                         <span className='text-sm font-medium mr-4 '>{reading_time} min read</span>
                          <button onClick={() => handelAddToBookeMarkes(blog)} className='text-xl '>
                               <IoBookmarksOutline />
                          </button>
@@ -30,14 +30,19 @@ const Blog = ({ blog, handelAddToBookeMarkes }) => {
                               hashtags.map((hash, inx) => <span key={inx} > <a className='px-1' href="">{hash}</a> </span>)
                          }
                     </p>
-                    <button className='underline underline-offset-1 text-teal-600 mt-5 text-sm font-semibold'>Mark as read</button>
+                    {/* Mark as read button */}
+                    <button onClick={() => handelMakeAsRead(reading_time, id)}
+                         className='underline underline-offset-1 text-teal-600 mt-5 text-sm font-semibold'
+                    >Mark As Read Time
+                    </button>
                </div>
           </main>
      );
 };
 Blog.propTypes = {
      blog: PropTypes.object.isRequired,
-     handelAddToBookeMarkes: PropTypes.func
+     handelAddToBookeMarkes: PropTypes.func,
+     handelMakeAsRead: PropTypes.func
 
 }
 export default Blog;

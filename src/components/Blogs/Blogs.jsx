@@ -4,7 +4,7 @@ import Blog from "../Blog/Blog";
 import PropTypes from 'prop-types';
 
 
-const Blogs = ({ handelAddToBookeMarkes }) => {
+const Blogs = ({ handelAddToBookeMarkes, handelMakeAsRead }) => {
      const [blogs, setBlogs] = useState([]);
      useEffect(() => {
           fetch('blogs.json')
@@ -16,7 +16,11 @@ const Blogs = ({ handelAddToBookeMarkes }) => {
                <h1 className="text-2xl font-semibold text-center mb-4
                ">Blogs :{blogs.length}</h1>
                {
-                    blogs.map((blog) => <Blog handelAddToBookeMarkes={handelAddToBookeMarkes} key={blog.id} blog={blog}  ></Blog>)
+                    blogs.map((blog) => <Blog handelAddToBookeMarkes={handelAddToBookeMarkes}
+                         key={blog.id}
+                         blog={blog} handelMakeAsRead={handelMakeAsRead} >
+
+                    </Blog>)
                }
           </div>
      );
@@ -24,6 +28,7 @@ const Blogs = ({ handelAddToBookeMarkes }) => {
 
 
 Blogs.propTypes = {
-     handelAddToBookeMarkes: PropTypes.func
+     handelAddToBookeMarkes: PropTypes.func,
+     handelMakeAsRead: PropTypes.func
 }
 export default Blogs;
